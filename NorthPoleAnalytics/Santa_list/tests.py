@@ -11,9 +11,7 @@ class ProductCreationTest(TestCase):
                     'Lado', 'Dato', 'Lile', 'Sandro', 'Mancho', 'Guri', 'Lela', 'Saba'
                 ]),
                 "niceness_coefficient": random.randint(0, 10),
-                "gift": random.choice([
-                    'Ball', 'Phone', 'Car', 'Train', 'Bear', 'Lego',
-                ]),
+                "gift_id": random.randint(1,7),
                 "santas_list": 1
             }
 

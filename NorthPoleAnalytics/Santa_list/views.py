@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import Kid, SantasList
+from Toy_factory.models import Toy
 
 @csrf_exempt
 def santas_list(request):
@@ -11,14 +12,17 @@ def santas_list(request):
     elif request.method == "POST":
         name = request.POST.get('name')
         niceness_coefficient = request.POST.get('niceness_coefficient')
-        gift = request.POST.get('gift')
+        gift_id = request.POST.get('gift_id')
         santas_list_id = request.POST.get('santas_list')
 
-        if not all([name, niceness_coefficient, gift, santas_list_id]):
+        if not all([name, niceness_coefficient, gift_id, santas_list_id]):
             return JsonResponse({'error': 'Missing required fields'}, status=400)
 
         try:
+            gift = Toy.objects.get(id=gift_id)
             santas_list = SantasList.objects.get(id=santas_list_id)
+        except Toy.DoesNotExist:
+            return JsonResponse({'error': 'Toy not found'}, status=404)
         except SantasList.DoesNotExist:
             return JsonResponse({'error': 'SantaList not found'}, status=404)
 
@@ -92,11 +96,11 @@ def serialize_kids(kids):
         "kids": [
             {
                 "name": kid.name,
-                "gift": kid.gift,
+                "gift": kid.gift.name,
                 "niceness_coefficient": kid.niceness_coefficient,
-                "santas_list": {
-                    "name": kid.santas_list.name
-                } if kid.santas_list else None
+                # "santas_list": {
+                #     "name": kid.santas_list.name
+                # } if kid.santas_list else None
             } for kid in kids
         ]
     }
