@@ -76,7 +76,7 @@ This Django project helps Santa manage the Christmas toy delivery process, calcu
     
 - **Method**: `POST`
 - **Description**: This endpoint created info about new Kid. 
-  
+
 ### 5. `/santa-list/nice/`
 
 - **Method**: `GET`
@@ -99,24 +99,51 @@ This Django project helps Santa manage the Christmas toy delivery process, calcu
       ]
     }
 
-### 6. `/santa-list/naughty/`
+### 6. `/santa-list/{kid-id}/`
 
 - **Method**: `GET`
-  - **Description**: This endpoint returns info about naughty kids with their wishes and their niceness.
+  - **Description**: This endpoint returns info about the kid with ID specified in the URL.
   
     **Response:**
     ```json
     {
-      "kids": [
+      "name": "Lasha",
+      "niceness_coefficient": 9,
+      "gift": "Puzzle",
+      "santas_list": "Christmas 2024"
+    }
+
+### 6. `/toy_factory/`
+
+  - **Method**: `DELETE`
+  - **Description**: This endpoint removes kid from the list.
+
+  - **Method**: `GET`
+  - **Description**: This endpoint returns info about the kid with ID specified in the URL.
+  
+    **Response:**
+    ```json
+    {
+      "toys": [
         {
-          "name": "Nana",
-          "gift": "Lego",
-          "niceness_coefficient": 2
+          "name": "Horse",
+          "toy_type": "Doll",
+          "quantity": 6
         },
         {
-          "name": "Nana",
-          "gift": "Puzzle",
-          "niceness_coefficient": 5
-        },
+          "name": "Ball",
+          "toy_type": "Sports",
+          "quantity": 1
+        }
+      ],
+      "coals": [
+        {
+          "coals": 13
+        }
       ]
     }
+
+### 6. `/toy_factory/produce/`
+
+  - **Method**: `POST`
+  - **Description**: This endpoint produces toys and coals for children if they're needed.

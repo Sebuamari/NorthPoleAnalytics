@@ -61,11 +61,8 @@ def kid(request, id):
             kid_data = {
                 'name': kid.name,
                 'niceness_coefficient': kid.niceness_coefficient,
-                'gift': kid.gift,
-                'santas_list': {
-                    'id': kid.santas_list.id,
-                    'name': kid.santas_list.name
-                } if kid.santas_list else None
+                'gift': kid.gift.name if kid.gift else None,
+                'santas_list': kid.santas_list.name if kid.santas_list else None
             }
 
             return JsonResponse(kid_data, safe=False)
