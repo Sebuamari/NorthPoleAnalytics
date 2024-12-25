@@ -3,8 +3,8 @@
 This Django project helps Santa manage the Christmas toy delivery process, calculate production time, and generate statistics based on the kids' gift wishes, niceness, and delivery requirements.
 
 ## Endpoints can be accessed only by santa
-username - santa
-password - hohoho123!
+- **username** - santa
+- **password** - hohoho123!
 
 ## Endpoints
 
@@ -61,18 +61,17 @@ password - hohoho123!
     ```json
     {
       "kids": [
-          {
-            "name": "Saba",
-            "gift": "Horse",
-            "niceness_coefficient": 10
-          },
-          {
-            "name": "Mancho",
-            "gift": "Car",
-            "niceness_coefficient": 6
-          },
-        ]
-      }
+        {
+          "name": "Saba",
+          "gift": "Horse",
+          "niceness_coefficient": 10
+        },
+        {
+          "name": "Mancho",
+          "gift": "Car",
+          "niceness_coefficient": 6
+        },
+      ]
     }
     
 - **Method**: `POST`
@@ -87,18 +86,17 @@ password - hohoho123!
     ```json
     {
       "kids": [
-          {
-            "name": "Saba",
-            "gift": "Horse",
-            "niceness_coefficient": 10
-          },
-          {
-            "name": "Mancho",
-            "gift": "Car",
-            "niceness_coefficient": 9
-          },
-        ]
-      }
+        {
+          "name": "Saba",
+          "gift": "Horse",
+          "niceness_coefficient": 10
+        },
+        {
+          "name": "Mancho",
+          "gift": "Car",
+          "niceness_coefficient": 9
+        },
+      ]
     }
 
 ### 6. `/santa-list/naughty/`
@@ -110,16 +108,15 @@ password - hohoho123!
     ```json
     {
       "kids": [
-          {
-            "name": "Nana",
-            "gift": "Lego",
-            "niceness_coefficient": 2
-          },
-          {
-            "name": "Nana",
-            "gift": "Puzzle",
-            "niceness_coefficient": 5
-          },
-        ]
-      }
+        {
+          "name": "Nana",
+          "gift": "Lego",
+          "niceness_coefficient": 2
+        },
+        {
+          "name": "Nana",
+          "gift": "Puzzle",
+          "niceness_coefficient": 5
+        },
+      ]
     }
