@@ -2,6 +2,10 @@
 
 This Django project helps Santa manage the Christmas toy delivery process, calculate production time, and generate statistics based on the kids' gift wishes, niceness, and delivery requirements.
 
+## Endpoints can be accessed only by santa
+username - santa
+password - hohoho123!
+
 ## Endpoints
 
 ### 1. `/admin/`
@@ -51,25 +55,25 @@ This Django project helps Santa manage the Christmas toy delivery process, calcu
 ### 4. `/santa-list/`
 
 - **Method**: `GET`
-- **Description**: This endpoint returns info about the kids with their wishes and their niceness.
+  - **Description**: This endpoint returns info about the kids with their wishes and their niceness.
   
-  **Response:**
-  ```json
-  {
-    "kids": [
-        {
-          "name": "Saba",
-          "gift": "Horse",
-          "niceness_coefficient": 10
-        },
-        {
-          "name": "Mancho",
-          "gift": "Car",
-          "niceness_coefficient": 6
-        },
+    **Response:**
+    ```json
+    {
+      "kids": [
+          {
+            "name": "Saba",
+            "gift": "Horse",
+            "niceness_coefficient": 10
+          },
+          {
+            "name": "Mancho",
+            "gift": "Car",
+            "niceness_coefficient": 6
+          },
+        ]
       }
-    ]
-  }
+    }
     
 - **Method**: `POST`
 - **Description**: This endpoint created info about new Kid. 
@@ -77,45 +81,45 @@ This Django project helps Santa manage the Christmas toy delivery process, calcu
 ### 5. `/santa-list/nice/`
 
 - **Method**: `GET`
-- **Description**: This endpoint returns info about nice kids with their wishes and their niceness.
+  - **Description**: This endpoint returns info about nice kids with their wishes and their niceness.
   
-  **Response:**
-  ```json
-  {
-    "kids": [
-        {
-          "name": "Saba",
-          "gift": "Horse",
-          "niceness_coefficient": 10
-        },
-        {
-          "name": "Mancho",
-          "gift": "Car",
-          "niceness_coefficient": 9
-        },
+    **Response:**
+    ```json
+    {
+      "kids": [
+          {
+            "name": "Saba",
+            "gift": "Horse",
+            "niceness_coefficient": 10
+          },
+          {
+            "name": "Mancho",
+            "gift": "Car",
+            "niceness_coefficient": 9
+          },
+        ]
       }
-    ]
-  }
+    }
 
 ### 6. `/santa-list/naughty/`
 
 - **Method**: `GET`
-- **Description**: This endpoint returns info about naughty kids with their wishes and their niceness.
+  - **Description**: This endpoint returns info about naughty kids with their wishes and their niceness.
   
-  **Response:**
-  ```json
-  {
-    "kids": [
-        {
-          "name": "Nana",
-          "gift": "Lego",
-          "niceness_coefficient": 2
-        },
-        {
-          "name": "Nana",
-          "gift": "Puzzle",
-          "niceness_coefficient": 5
-        },
+    **Response:**
+    ```json
+    {
+      "kids": [
+          {
+            "name": "Nana",
+            "gift": "Lego",
+            "niceness_coefficient": 2
+          },
+          {
+            "name": "Nana",
+            "gift": "Puzzle",
+            "niceness_coefficient": 5
+          },
+        ]
       }
-    ]
-  }
+    }
