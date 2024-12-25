@@ -1,9 +1,14 @@
+from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Sum, F
 from django.http import JsonResponse
 from Santa_list.models import SantasList, Kid
 from Toy_factory.models import Toy
+from helpers import are_you_santa
 
+@login_required(login_url='/login/')
 def statistics(request):
+    are_you_santa(request)
+
     if request.method == "GET":
         lists_data = []
         for santas_list in SantasList.objects.all():
@@ -16,7 +21,10 @@ def statistics(request):
         return JsonResponse({"lists": lists_data}, safe=False)
     return JsonResponse({"error": "Method not allowed"}, status=405)
 
+@login_required(login_url='/login/')
 def statistics_toys(request):
+    are_you_santa(request)
+
     if request.method == "GET":
         toy_counts = (
             Kid.objects.filter(niceness_coefficient__gte=6).values('gift__name')

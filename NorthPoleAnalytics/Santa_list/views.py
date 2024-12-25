@@ -1,10 +1,15 @@
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import Kid, SantasList
 from Toy_factory.models import Toy
+from helpers import are_you_santa, serialize_kids
 
+@login_required(login_url='/login/')
 @csrf_exempt
 def santas_list(request):
+    are_you_santa(request)
+
     if request.method == "GET":
         kids_data = serialize_kids(Kid.objects.all())
         return JsonResponse(kids_data, safe=False)
@@ -44,8 +49,11 @@ def santas_list(request):
 
     return JsonResponse({"error": "Method not allowed"}, status=405)
 
+@login_required(login_url='/login/')
 @csrf_exempt
 def kid(request, id):
+    are_you_santa(request)
+
     if request.method == "GET":
         try:
             kid = Kid.objects.get(id=id)
@@ -75,7 +83,10 @@ def kid(request, id):
 
     return JsonResponse({"error": "Method not allowed"}, status=405)
 
+@login_required(login_url='/login/')
 def santas_list_naughty(request):
+    are_you_santa(request)
+
     if request.method == "GET":
         santa_list = SantasList.objects.first()
         naughty_kids = santa_list.naughty_list
@@ -83,24 +94,13 @@ def santas_list_naughty(request):
         return JsonResponse(kids_data, safe=False)
     return JsonResponse({"error": "Method not allowed"}, status=405)
 
+@login_required(login_url='/login/')
 def santas_list_nice(request):
+    are_you_santa(request)
+
     if request.method == "GET":
         santa_list = SantasList.objects.first()
         nice_kids = santa_list.nice_list
         kids_data = serialize_kids(nice_kids)
         return JsonResponse(kids_data, safe=False)
     return JsonResponse({"error": "Method not allowed"}, status=405)
-
-def serialize_kids(kids):
-    return {
-        "kids": [
-            {
-                "name": kid.name,
-                "gift": kid.gift.name,
-                "niceness_coefficient": kid.niceness_coefficient,
-                # "santas_list": {
-                #     "name": kid.santas_list.name
-                # } if kid.santas_list else None
-            } for kid in kids
-        ]
-    }
