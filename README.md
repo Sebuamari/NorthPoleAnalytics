@@ -11,46 +11,46 @@ This Django project helps Santa manage the Christmas toy delivery process, calcu
 ### 1. `/admin/`
 
 - **Method**: `GET`
-- **Description**: Access the Django admin panel to manage models, including `Kid`, `Toy`, and `SantasList`.
+  - **Description**: Access the Django admin panel to manage models, including `Kid`, `Toy`, and `SantasList`.
 
 ### 2. `/statistics/`
 
 - **Method**: `GET`
-- **Description**: This endpoint returns statistics about Santa's lists. It includes name of the list and number of nice/naughty kids in that particular list.
+  - **Description**: This endpoint returns statistics about Santa's lists. It includes name of the list and number of nice/naughty kids in that particular list.
   
-  **Response:**
-  ```json
-  {
-    "lists": [
-      {
-        "list_name": "Christmas 2024",
-        "nice_kids_count": 17,
-        "naughty_kids_count": 13
-      }
-    ]
-  }
+    **Response:**
+    ```json
+    {
+      "lists": [
+        {
+          "list_name": "Christmas 2024",
+          "nice_kids_count": 17,
+          "naughty_kids_count": 13
+        }
+      ]
+    }
 
 ### 3. `/statistics/toys/`
 
 - **Method**: `GET`
-- **Description**: This endpoint returns statistics about the toys needed based on kids' gift wishes and their niceness. It includes the overall production time, toy count, and delivery time.
+  - **Description**: This endpoint returns statistics about the toys needed based on kids' gift wishes and their niceness. It includes the overall production time, toy count, and delivery time.
   
-  **Response:**
-  ```json
-  {
-    "toys_needed": [
-      {
-        "name": "Teddy Bear",
-        "required_quantity": 2,
-        "total_production_time": 10
-      }
-    ],
-    "overall_production_time": 10,
-    "overall_toy_count": 2,
-    "naughty_kids_count": 1,
-    "total_delivery_time": 4.5,
-    "total_needed_time": 14.5
-  }
+    **Response:**
+    ```json
+    {
+      "toys_needed": [
+        {
+          "name": "Teddy Bear",
+          "required_quantity": 2,
+          "total_production_time": 10
+        }
+      ],
+      "overall_production_time": 10,
+      "overall_toy_count": 2,
+      "naughty_kids_count": 1,
+      "total_delivery_time": 4.5,
+      "total_needed_time": 14.5
+    }
 
 ### 4. `/santa-list/`
 
@@ -101,6 +101,9 @@ This Django project helps Santa manage the Christmas toy delivery process, calcu
 
 ### 6. `/santa-list/{kid-id}/`
 
+- **Method**: `DELETE`
+  - **Description**: This endpoint removes kid from the list.
+
 - **Method**: `GET`
   - **Description**: This endpoint returns info about the kid with ID specified in the URL.
   
@@ -113,12 +116,9 @@ This Django project helps Santa manage the Christmas toy delivery process, calcu
       "santas_list": "Christmas 2024"
     }
 
-### 6. `/toy_factory/`
+### 7. `/toy_factory/`
 
-  - **Method**: `DELETE`
-  - **Description**: This endpoint removes kid from the list.
-
-  - **Method**: `GET`
+- **Method**: `GET`
   - **Description**: This endpoint returns info about the kid with ID specified in the URL.
   
     **Response:**
@@ -143,7 +143,7 @@ This Django project helps Santa manage the Christmas toy delivery process, calcu
       ]
     }
 
-### 6. `/toy_factory/produce/`
+### 8. `/toy_factory/produce/`
 
-  - **Method**: `POST`
+- **Method**: `POST`
   - **Description**: This endpoint produces toys and coals for children if they're needed.
