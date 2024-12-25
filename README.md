@@ -147,3 +147,21 @@ This Django project helps Santa manage the Christmas toy delivery process, calcu
 
 - **Method**: `POST`
   - **Description**: This endpoint produces toys and coals for children if they're needed.
+
+### 9. `/toy_factory/generate/`
+
+- **Method**: `GET`
+  - **Description**: This endpoint generates gifts for kids based on their niceness level. Nice kids get gifts they wished for. Naughty kids get coals.
+
+    **Response:**
+    ```json
+    {
+      "generated_gifts": [
+        {
+          "Saba": "Horse"
+        },
+        {
+          "Lela": "Coal"
+        },
+      ]
+    }

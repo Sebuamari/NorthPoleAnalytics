@@ -22,11 +22,31 @@ def toy_factory(request):
             ],
             "coals": [
                 {
-                    "coals": coal.quantity
+                    "quantity": coal.quantity
                 } for coal in Coal.objects.all()
             ]
         }
         return JsonResponse(toys_data, safe=False)
+    return JsonResponse({"error": "Method not allowed"}, status=405)
+
+@login_required(login_url='/login/')
+def toy(request, id):
+    are_you_santa(request)
+
+    if request.method == "GET":
+        try:
+            toy = Toy.objects.get(id=id)
+
+            toy_data = {
+                "name": toy.name,
+                "toy_type": toy.toy_type,
+                "quantity": toy.quantity
+            }
+
+            return JsonResponse(toy_data, safe=False)
+        except Toy.DoesNotExist:
+            return JsonResponse({'error': 'Toy not found'}, status=404)
+
     return JsonResponse({"error": "Method not allowed"}, status=405)
 
 @login_required(login_url='/login/')
@@ -75,4 +95,26 @@ def produce_toys(request):
             return JsonResponse(response)
         else:
             return JsonResponse({"message": "No production needed! Santa's ready to go!"})
+    return JsonResponse({"error": "Method not allowed"}, status=405)
+
+@login_required(login_url='/login/')
+@csrf_exempt
+def generate_gifts(request):
+    are_you_santa(request)
+
+    if request.method == "GET":
+        kids = Kid.objects.all()
+        response = {
+            "generated_gifts": []
+        }
+
+        for kid in kids:
+            if kid.niceness_coefficient > 6:
+                response["generated_gifts"].append({
+                    kid.name: kid.gift.name
+                })
+            response["generated_gifts"].append({
+                kid.name: "Coal"
+            })
+        return JsonResponse(response)
     return JsonResponse({"error": "Method not allowed"}, status=405)
